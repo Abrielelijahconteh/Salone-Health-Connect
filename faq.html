@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - Salone Health Connect</title>
+    <meta name="description" content="Frequently asked questions about Salone Health Connect healthcare platform for Sierra Leone.">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Navigation Bar - Main site navigation with links to all pages -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="navbar-brand">
+                <span>🏥</span> Salone Health Connect
+            </a>
+            <div class="navbar-nav">
+                <a href="index.html">Home</a>
+                <a href="clinics.html">Clinics</a>
+                <a href="education.html">Health Education</a>
+                <a href="alerts.html">Emergency Alerts</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="navbar-actions auth-buttons">
+                <a href="signup.html" class="btn btn-primary">Sign Up</a>
+                <a href="login.html" class="btn btn-outline">Login</a>
+            </div>
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header - FAQ page title and description -->
+    <section class="section" style="background: var(--gradient-primary); color: var(--white); padding: 3rem 0;">
+        <div class="container">
+            <h1 style="color: var(--white);">Frequently Asked Questions</h1>
+            <p style="color: var(--white); opacity: 0.95;">Find answers to common questions about Salone Health Connect</p>
+        </div>
+    </section>
+
+    <!-- Search Section - Search input for filtering FAQs -->
+    <section class="section">
+        <div class="container">
+            <!-- Search input for filtering FAQs by question or answer -->
+            <div class="search-bar" style="max-width: 600px; margin: 0 auto;">
+                <input type="text" id="faq-search" class="search-input" placeholder="Search FAQs..." onkeyup="searchFAQs()">
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section - Accordion with FAQs dynamically loaded from Storage -->
+    <section class="section" style="background: var(--gray-100);">
+        <div class="container">
+            <div class="accordion" id="faq-accordion">
+                <!-- FAQs will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section - Call to action for users who need more help -->
+    <section class="section">
+        <div class="container">
+            <div class="glass-card" style="text-align: center;">
+                <h2>Still Have Questions?</h2>
+                <p style="color: var(--gray-600); margin-bottom: 1.5rem;">Can't find the answer you're looking for? Our support team is here to help.</p>
+                <a href="contact.html" class="btn btn-primary">Contact Support</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer - Site footer with copyright -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 Salone Health Connect. A Digital Public Good for Sierra Leone.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Container - Container for notification messages -->
+    <div class="toast-container"></div>
+
+    <!-- Main JavaScript file with authentication and utilities -->
+    <script src="js/main.js"></script>
+    <!-- Inline script for FAQs loading, searching, and accordion functionality -->
+    <script>
+        // Load FAQs from Storage object and initialize accordion functionality
+        function loadFAQs() {
+            const container = document.getElementById('faq-accordion');
+            
+            container.innerHTML = Storage.faqs.map(faq => `
+                <div class="accordion-item faq-item" data-question="${faq.question.toLowerCase()}" data-answer="${faq.answer.toLowerCase()}">
+                    <div class="accordion-header">
+                        ${faq.question}
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>${faq.answer}</p>
+                    </div>
+                </div>
+            `).join('');
+            
+            // Initialize accordion click handlers for expand/collapse functionality
+            const headers = container.querySelectorAll('.accordion-header');
+            headers.forEach(header => {
+                header.addEventListener('click', () => {
+                    const item = header.parentElement;
+                    const isActive = item.classList.contains('active');
+                    
+                    // Close all items
+                    container.querySelectorAll('.accordion-item').forEach(i => {
+                        i.classList.remove('active');
+                    });
+                    
+                    // Open clicked item if it wasn't active
+                    if (!isActive) {
+                        item.classList.add('active');
+                    }
+                });
+            });
+        }
+
+        // Search FAQs by question or answer text
+        function searchFAQs() {
+            const query = document.getElementById('faq-search').value.toLowerCase();
+            const items = document.querySelectorAll('.faq-item');
+            
+            items.forEach(item => {
+                const question = item.dataset.question;
+                const answer = item.dataset.answer;
+                const isVisible = question.includes(query) || answer.includes(query);
+                item.style.display = isVisible ? '' : 'none';
+            });
+        }
+
+        // Initialize FAQ page when DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            loadFAQs();
+        });
+    </script>
+</body>
+</html>

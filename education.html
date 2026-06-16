@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Education Center - Salone Health Connect</title>
+    <meta name="description" content="Access health education articles and resources on disease prevention, nutrition, and wellness in Sierra Leone.">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Navigation Bar - Main site navigation with links to all pages -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="navbar-brand">
+                <span>🏥</span> Salone Health Connect
+            </a>
+            <div class="navbar-nav">
+                <a href="index.html">Home</a>
+                <a href="clinics.html">Clinics</a>
+                <a href="education.html" class="active">Health Education</a>
+                <a href="alerts.html">Emergency Alerts</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="navbar-actions auth-buttons">
+                <a href="signup.html" class="btn btn-primary">Sign Up</a>
+                <a href="login.html" class="btn btn-outline">Login</a>
+            </div>
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header - Health education center title and description -->
+    <section class="section" style="background: var(--gradient-primary); color: var(--white); padding: 3rem 0;">
+        <div class="container">
+            <h1 style="color: var(--white);">Health Education Center</h1>
+            <p style="color: var(--white); opacity: 0.95;">Learn about disease prevention, nutrition, and wellness</p>
+        </div>
+    </section>
+
+    <!-- Search and Filter Section - Search bar and category filter buttons -->
+    <section class="section">
+        <div class="container">
+            <!-- Search input for health articles -->
+            <div class="search-bar">
+                <input type="text" id="article-search" class="search-input" placeholder="Search health articles...">
+                <button class="search-btn" onclick="filterArticles()">Search</button>
+            </div>
+            
+            <!-- Category filter buttons to narrow down articles by topic -->
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all" onclick="filterByCategory('all')">All Categories</button>
+                <button class="filter-btn" data-filter="Malaria Prevention" onclick="filterByCategory('Malaria Prevention')">Malaria Prevention</button>
+                <button class="filter-btn" data-filter="Maternal Health" onclick="filterByCategory('Maternal Health')">Maternal Health</button>
+                <button class="filter-btn" data-filter="Child Health" onclick="filterByCategory('Child Health')">Child Health</button>
+                <button class="filter-btn" data-filter="Nutrition" onclick="filterByCategory('Nutrition')">Nutrition</button>
+                <button class="filter-btn" data-filter="Hygiene & Sanitation" onclick="filterByCategory('Hygiene & Sanitation')">Hygiene & Sanitation</button>
+                <button class="filter-btn" data-filter="Mental Health" onclick="filterByCategory('Mental Health')">Mental Health</button>
+                <button class="filter-btn" data-filter="Vaccination" onclick="filterByCategory('Vaccination')">Vaccination</button>
+                <button class="filter-btn" data-filter="First Aid" onclick="filterByCategory('First Aid')">First Aid</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Articles Grid - Displays all health articles dynamically loaded from Storage -->
+    <section class="section" style="background: var(--gray-100);">
+        <div class="container">
+            <div class="grid grid-3" id="articles-grid">
+                <!-- Articles will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer - Site footer with copyright -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 Salone Health Connect. A Digital Public Good for Sierra Leone.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Container - Container for notification messages -->
+    <div class="toast-container"></div>
+
+    <!-- Main JavaScript file with authentication and utilities -->
+    <script src="js/main.js"></script>
+    <!-- Inline script for articles loading, searching, and filtering -->
+    <script>
+        let currentCategoryFilter = 'all';
+        let articleSearchQuery = '';
+
+        // Load articles from Storage object and apply filters
+        function loadArticles() {
+            const container = document.getElementById('articles-grid');
+            let filteredArticles = Storage.articles;
+            
+            // Apply category filter
+            if (currentCategoryFilter !== 'all') {
+                filteredArticles = filteredArticles.filter(article => article.category === currentCategoryFilter);
+            }
+            
+            // Apply search filter
+            if (articleSearchQuery) {
+                const query = articleSearchQuery.toLowerCase();
+                filteredArticles = filteredArticles.filter(article => 
+                    article.title.toLowerCase().includes(query) ||
+                    article.excerpt.toLowerCase().includes(query) ||
+                    article.category.toLowerCase().includes(query)
+                );
+            }
+            
+            if (filteredArticles.length === 0) {
+                container.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 3rem;">
+                        <div style="font-size: 4rem; margin-bottom: 1rem;">📚</div>
+                        <h3>No articles found</h3>
+                        <p style="color: var(--gray-600);">Try adjusting your search or filter criteria</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = filteredArticles.map(article => `
+                <div class="article-card" data-category="${article.category}">
+                    <img src="${article.image}" alt="${article.title}" class="article-image">
+                    <div class="article-content">
+                        <span class="article-category">${article.category}</span>
+                        <h3 class="article-title">${article.title}</h3>
+                        <p class="article-excerpt">${article.excerpt}</p>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-size: 0.875rem; color: var(--gray-500);">${article.date}</span>
+                            <button class="btn btn-primary btn-sm" onclick="Navigation.goToArticleDetails(${article.id})">Read More</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Filter articles by selected category
+        function filterByCategory(category) {
+            currentCategoryFilter = category;
+            
+            // Update active button
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.filter === category) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            loadArticles();
+        }
+
+        // Filter articles by search query (title, excerpt, category)
+        function filterArticles() {
+            articleSearchQuery = document.getElementById('article-search').value;
+            loadArticles();
+        }
+
+        // Initialize education page when DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            loadArticles();
+            
+            // Add search on enter key
+            document.getElementById('article-search').addEventListener('keyup', function(e) {
+                if (e.key === 'Enter') {
+                    filterArticles();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
