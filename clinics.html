@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clinics Directory - Salone Health Connect</title>
+    <meta name="description" content="Find healthcare facilities and clinics across Sierra Leone with Salone Health Connect.">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Navigation Bar - Main site navigation with links to all pages -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="navbar-brand">
+                <span>🏥</span> Salone Health Connect
+            </a>
+            <div class="navbar-nav">
+                <a href="index.html">Home</a>
+                <a href="clinics.html" class="active">Clinics</a>
+                <a href="education.html">Health Education</a>
+                <a href="alerts.html">Emergency Alerts</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="navbar-actions auth-buttons">
+                <a href="signup.html" class="btn btn-primary">Sign Up</a>
+                <a href="login.html" class="btn btn-outline">Login</a>
+            </div>
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header - Clinics directory title and description -->
+    <section class="section" style="background: var(--gradient-primary); color: var(--white); padding: 3rem 0;">
+        <div class="container">
+            <h1 style="color: var(--white);">Clinics Directory</h1>
+            <p style="color: var(--white); opacity: 0.95;">Find healthcare facilities across Sierra Leone</p>
+        </div>
+    </section>
+
+    <!-- Search and Filter Section - Search bar and district filter buttons -->
+    <section class="section">
+        <div class="container">
+            <!-- Search input for clinic name or location -->
+            <div class="search-bar">
+                <input type="text" id="clinic-search" class="search-input" placeholder="Search clinics by name or location...">
+                <button class="search-btn" onclick="filterClinics()">Search</button>
+            </div>
+            
+            <!-- District filter buttons to narrow down clinics by location -->
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all" onclick="filterByDistrict('all')">All Districts</button>
+                <button class="filter-btn" data-filter="Western Area" onclick="filterByDistrict('Western Area')">Western Area</button>
+                <button class="filter-btn" data-filter="Bo" onclick="filterByDistrict('Bo')">Bo</button>
+                <button class="filter-btn" data-filter="Bombali" onclick="filterByDistrict('Bombali')">Bombali</button>
+                <button class="filter-btn" data-filter="Kenema" onclick="filterByDistrict('Kenema')">Kenema</button>
+                <button class="filter-btn" data-filter="Kono" onclick="filterByDistrict('Kono')">Kono</button>
+                <button class="filter-btn" data-filter="Port Loko" onclick="filterByDistrict('Port Loko')">Port Loko</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Clinics Grid - Displays all clinics dynamically loaded from Storage -->
+    <section class="section" style="background: var(--gray-100);">
+        <div class="container">
+            <div class="grid grid-3" id="clinics-grid">
+                <!-- Clinics will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer - Site footer with copyright -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 Salone Health Connect. A Digital Public Good for Sierra Leone.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Container - Container for notification messages -->
+    <div class="toast-container"></div>
+
+    <!-- Main JavaScript file with authentication and utilities -->
+    <script src="js/main.js"></script>
+    <!-- Inline script for clinics loading, searching, and filtering -->
+    <script>
+        let currentFilter = 'all';
+        let searchQuery = '';
+
+        // Load clinics from Storage object and apply filters
+        function loadClinics() {
+            const container = document.getElementById('clinics-grid');
+            let filteredClinics = Storage.clinics;
+            
+            // Apply district filter
+            if (currentFilter !== 'all') {
+                filteredClinics = filteredClinics.filter(clinic => clinic.district === currentFilter);
+            }
+            
+            // Apply search filter
+            if (searchQuery) {
+                const query = searchQuery.toLowerCase();
+                filteredClinics = filteredClinics.filter(clinic => 
+                    clinic.name.toLowerCase().includes(query) ||
+                    clinic.district.toLowerCase().includes(query) ||
+                    clinic.address.toLowerCase().includes(query)
+                );
+            }
+            
+            if (filteredClinics.length === 0) {
+                container.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 3rem;">
+                        <div style="font-size: 4rem; margin-bottom: 1rem;">🔍</div>
+                        <h3>No clinics found</h3>
+                        <p style="color: var(--gray-600);">Try adjusting your search or filter criteria</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = filteredClinics.map(clinic => `
+                <div class="card" data-district="${clinic.district}">
+                    <img src="${clinic.image}" alt="${clinic.name}" class="card-image">
+                    <div class="card-content">
+                        <h3 class="card-title">${clinic.name}</h3>
+                        <p class="card-description">${clinic.description}</p>
+                        <div style="margin-bottom: 1rem;">
+                            <span style="display: inline-block; padding: 0.25rem 0.75rem; background: var(--gray-200); border-radius: 1rem; font-size: 0.875rem; margin-right: 0.5rem; margin-bottom: 0.5rem;">📍 ${clinic.district}</span>
+                            <span style="display: inline-block; padding: 0.25rem 0.75rem; background: var(--gray-200); border-radius: 1rem; font-size: 0.875rem;">🕐 ${clinic.hours}</span>
+                        </div>
+                        <div style="margin-bottom: 1rem;">
+                            <p style="font-size: 0.875rem; color: var(--gray-600);">📞 ${clinic.phone}</p>
+                            <p style="font-size: 0.875rem; color: var(--gray-600);">📍 ${clinic.address}</p>
+                        </div>
+                        <div class="card-footer">
+                            <span style="font-size: 0.875rem; color: var(--gray-500);">${clinic.services.length} services</span>
+                            <button class="btn btn-primary btn-sm" onclick="Navigation.goToClinicDetails(${clinic.id})">View Details</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Filter clinics by selected district
+        function filterByDistrict(district) {
+            currentFilter = district;
+            
+            // Update active button
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.filter === district) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            loadClinics();
+        }
+
+        // Filter clinics by search query (name, location, address)
+        function filterClinics() {
+            searchQuery = document.getElementById('clinic-search').value;
+            loadClinics();
+        }
+
+        // Initialize clinics page when DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            loadClinics();
+            
+            // Add search on enter key
+            document.getElementById('clinic-search').addEventListener('keyup', function(e) {
+                if (e.key === 'Enter') {
+                    filterClinics();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
