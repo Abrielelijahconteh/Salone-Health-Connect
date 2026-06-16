@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clinic Details - Salone Health Connect</title>
+    <meta name="description" content="View detailed information about healthcare facilities in Sierra Leone.">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Navigation Bar - Main site navigation with links to all pages -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="navbar-brand">
+                <span>🏥</span> Salone Health Connect
+            </a>
+            <div class="navbar-nav">
+                <a href="index.html">Home</a>
+                <a href="clinics.html" class="active">Clinics</a>
+                <a href="education.html">Health Education</a>
+                <a href="alerts.html">Emergency Alerts</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="navbar-actions auth-buttons">
+                <a href="signup.html" class="btn btn-primary">Sign Up</a>
+                <a href="login.html" class="btn btn-outline">Login</a>
+            </div>
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Clinic Details Section - Displays full information about selected clinic from Local Storage -->
+    <section class="section">
+        <div class="container">
+            <div class="glass-card">
+                <div id="clinic-details-content">
+                    <!-- Clinic details will be loaded dynamically -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer - Site footer with copyright -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 Salone Health Connect. A Digital Public Good for Sierra Leone.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Container - Container for notification messages -->
+    <div class="toast-container"></div>
+
+    <!-- Main JavaScript file with authentication and utilities -->
+    <script src="js/main.js"></script>
+    <!-- Inline script for loading clinic details from Local Storage -->
+    <script>
+        // Load clinic details from Local Storage (selectedClinic) and display them
+        function loadClinicDetails() {
+            const clinicData = localStorage.getItem('selectedClinic');
+            
+            if (!clinicData) {
+                document.getElementById('clinic-details-content').innerHTML = `
+                    <div style="text-align: center; padding: 3rem;">
+                        <div style="font-size: 4rem; margin-bottom: 1rem;">🏥</div>
+                        <h3>No Clinic Selected</h3>
+                        <p style="color: var(--gray-600); margin-bottom: 1.5rem;">Please select a clinic from the directory</p>
+                        <a href="clinics.html" class="btn btn-primary">Browse Clinics</a>
+                    </div>
+                `;
+                return;
+            }
+            
+            const clinic = JSON.parse(clinicData);
+            
+            document.getElementById('clinic-details-content').innerHTML = `
+                <div style="margin-bottom: 2rem;">
+                    <a href="clinics.html" style="color: var(--primary-blue); font-weight: 600;">← Back to Clinics</a>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                    <div>
+                        <img src="${clinic.image}" alt="${clinic.name}" style="width: 100%; border-radius: var(--radius-xl); margin-bottom: 1.5rem;">
+                        
+                        <h1 style="margin-bottom: 0.5rem;">${clinic.name}</h1>
+                        <p style="color: var(--gray-600); margin-bottom: 1.5rem;">${clinic.description}</p>
+                        
+                        <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem;">
+                            <span style="padding: 0.5rem 1rem; background: var(--primary-blue); color: var(--white); border-radius: 2rem; font-size: 0.875rem;">📍 ${clinic.district}</span>
+                            <span style="padding: 0.5rem 1rem; background: var(--teal); color: var(--white); border-radius: 2rem; font-size: 0.875rem;">🕐 ${clinic.hours}</span>
+                        </div>
+                        
+                        <a href="tel:${clinic.phone}" class="btn btn-primary" style="width: 100%; margin-bottom: 1rem;">📞 Call ${clinic.phone}</a>
+                        <a href="contact.html" class="btn btn-outline" style="width: 100%;">💬 Contact Support</a>
+                    </div>
+                    
+                    <div>
+                        <div style="background: var(--gray-100); padding: 1.5rem; border-radius: var(--radius-lg); margin-bottom: 1.5rem;">
+                            <h3 style="margin-bottom: 1rem;">📍 Location</h3>
+                            <p style="color: var(--gray-700);">${clinic.address}</p>
+                        </div>
+                        
+                        <div style="background: var(--gray-100); padding: 1.5rem; border-radius: var(--radius-lg); margin-bottom: 1.5rem;">
+                            <h3 style="margin-bottom: 1rem;">📞 Contact</h3>
+                            <p style="color: var(--gray-700); margin-bottom: 0.5rem;"><strong>Phone:</strong> ${clinic.phone}</p>
+                            <p style="color: var(--gray-700);"><strong>Hours:</strong> ${clinic.hours}</p>
+                        </div>
+                        
+                        <div style="background: var(--gray-100); padding: 1.5rem; border-radius: var(--radius-lg);">
+                            <h3 style="margin-bottom: 1rem;">🏥 Services Offered</h3>
+                            <ul style="list-style: none; padding: 0;">
+                                ${clinic.services.map(service => `
+                                    <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--gray-300); color: var(--gray-700);">
+                                        ✓ ${service}
+                                    </li>
+                                `).join('')}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Initialize clinic details page when DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            loadClinicDetails();
+        });
+    </script>
+</body>
+</html>
