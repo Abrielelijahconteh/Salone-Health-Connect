@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Salone Health Connect</title>
+    <meta name="description" content="Your personalized healthcare dashboard on Salone Health Connect.">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Navigation Bar - Main site navigation with links to all pages -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="navbar-brand">
+                <span>🏥</span> Salone Health Connect
+            </a>
+            <div class="navbar-nav">
+                <a href="index.html">Home</a>
+                <a href="clinics.html">Clinics</a>
+                <a href="education.html">Health Education</a>
+                <a href="alerts.html">Emergency Alerts</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="navbar-actions auth-buttons">
+                <a href="signup.html" class="btn btn-primary">Sign Up</a>
+                <a href="login.html" class="btn btn-outline">Login</a>
+            </div>
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard Header - Personalized welcome message for logged-in users -->
+    <section class="dashboard-header">
+        <div class="container">
+            <h1 class="dashboard-welcome" id="welcome-message">Welcome to Your Dashboard</h1>
+            <p>Access healthcare services and information tailored for you</p>
+        </div>
+    </section>
+
+    <!-- Dashboard Content - Main dashboard with quick access, stats, and activity -->
+    <section class="section">
+        <div class="container">
+            <!-- Quick Access Cards - Navigation shortcuts to main features -->
+            <div class="section-header">
+                <h2>Quick Access</h2>
+                <p>Frequently used healthcare services</p>
+            </div>
+            
+            <div class="quick-access">
+                <div class="quick-access-card" onclick="Navigation.goToPage('clinics.html')">
+                    <div class="quick-access-icon">🏥</div>
+                    <h3>Find Clinics</h3>
+                    <p>Locate healthcare facilities near you</p>
+                </div>
+                <div class="quick-access-card" onclick="Navigation.goToPage('education.html')">
+                    <div class="quick-access-icon">📚</div>
+                    <h3>Health Education</h3>
+                    <p>Learn about disease prevention and wellness</p>
+                </div>
+                <div class="quick-access-card" onclick="Navigation.goToPage('alerts.html')">
+                    <div class="quick-access-icon">🚨</div>
+                    <h3>Emergency Alerts</h3>
+                    <p>Stay informed about health emergencies</p>
+                </div>
+                <div class="quick-access-card" onclick="Navigation.goToPage('contact.html')">
+                    <div class="quick-access-icon">💬</div>
+                    <h3>Contact Support</h3>
+                    <p>Get help from our support team</p>
+                </div>
+            </div>
+
+            <!-- Dashboard Statistics - User health overview and platform stats -->
+            <div class="section-header">
+                <h2>Your Health Overview</h2>
+                <p>Quick health statistics and information</p>
+            </div>
+            
+            <div class="dashboard-stats">
+                <div class="dashboard-stat">
+                    <div class="dashboard-stat-number">8</div>
+                    <div class="dashboard-stat-label">Clinics Near You</div>
+                </div>
+                <div class="dashboard-stat">
+                    <div class="dashboard-stat-number">24</div>
+                    <div class="dashboard-stat-label">Health Articles Read</div>
+                </div>
+                <div class="dashboard-stat">
+                    <div class="dashboard-stat-number">5</div>
+                    <div class="dashboard-stat-label">Active Alerts</div>
+                </div>
+                <div class="dashboard-stat">
+                    <div class="dashboard-stat-number">117</div>
+                    <div class="dashboard-stat-label">Emergency Hotline</div>
+                </div>
+            </div>
+
+            <!-- Recent Activity - User's interaction history with the platform -->
+            <div class="section-header">
+                <h2>Recent Activity</h2>
+                <p>Your latest interactions with the platform</p>
+            </div>
+            
+            <div class="activity-feed">
+                <div class="activity-item">
+                    <div class="activity-icon">📚</div>
+                    <div class="activity-content">
+                        <h4>Read Article: Malaria Prevention</h4>
+                        <p class="activity-time">2 hours ago</p>
+                    </div>
+                </div>
+                <div class="activity-item">
+                    <div class="activity-icon">🏥</div>
+                    <div class="activity-content">
+                        <h4>Viewed: Connaught Hospital</h4>
+                        <p class="activity-time">Yesterday</p>
+                    </div>
+                </div>
+                <div class="activity-item">
+                    <div class="activity-icon">🚨</div>
+                    <div class="activity-content">
+                        <h4>Checked: Cholera Prevention Alert</h4>
+                        <p class="activity-time">2 days ago</p>
+                    </div>
+                </div>
+                <div class="activity-item">
+                    <div class="activity-icon">👤</div>
+                    <div class="activity-content">
+                        <h4>Account Created</h4>
+                        <p class="activity-time">3 days ago</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Health Announcements - Important health updates from Ministry of Health -->
+            <div class="section-header" style="margin-top: 3rem;">
+                <h2>Health Announcements</h2>
+                <p>Important updates from the Ministry of Health</p>
+            </div>
+            
+            <div class="emergency-alert">
+                <div class="emergency-alert-title">📢 Free Vaccination Campaign</div>
+                <div class="emergency-alert-content">
+                    COVID-19 booster shots and measles vaccines now available at all government health centers. Visit your nearest clinic today.
+                </div>
+            </div>
+            
+            <div class="emergency-alert">
+                <div class="emergency-alert-title">🌧️ Rainy Season Health Tips</div>
+                <div class="emergency-alert-content">
+                    As rainy season approaches, ensure you have clean water, use mosquito nets, and maintain good hygiene to prevent waterborne diseases.
+                </div>
+            </div>
+
+            <!-- Emergency Notice - Critical emergency contact numbers -->
+            <div class="emergency-alert urgent">
+                <div class="emergency-alert-title">🚨 Emergency Contact Numbers</div>
+                <div class="emergency-alert-content">
+                    <strong>Ambulance:</strong> 117 | <strong>Police:</strong> 119 | <strong>Fire:</strong> 112 | <strong>National Health:</strong> 117
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer - Site footer with copyright -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 Salone Health Connect. A Digital Public Good for Sierra Leone.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Container - Container for notification messages -->
+    <div class="toast-container"></div>
+
+    <!-- Main JavaScript file with authentication and utilities -->
+    <script src="js/main.js"></script>
+    <!-- Inline script for dashboard initialization -->
+    <script>
+        // Initialize dashboard when DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            const user = Auth.getCurrentUser();
+            
+            if (user) {
+                document.getElementById('welcome-message').textContent = `Welcome, ${user.name}!`;
+            } else {
+                document.getElementById('welcome-message').textContent = 'Welcome to Your Dashboard';
+            }
+        });
+    </script>
+</body>
+</html>
