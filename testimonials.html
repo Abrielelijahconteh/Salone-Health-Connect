@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testimonials - Salone Health Connect</title>
+    <meta name="description" content="Read testimonials from users, healthcare workers, and patients about their experience with Salone Health Connect in Sierra Leone.">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Navigation Bar - Main site navigation with links to all pages -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="navbar-brand">
+                <span>🏥</span> Salone Health Connect
+            </a>
+            <div class="navbar-nav">
+                <a href="index.html">Home</a>
+                <a href="clinics.html">Clinics</a>
+                <a href="education.html">Health Education</a>
+                <a href="alerts.html">Emergency Alerts</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="navbar-actions auth-buttons">
+                <a href="signup.html" class="btn btn-primary">Sign Up</a>
+                <a href="login.html" class="btn btn-outline">Login</a>
+            </div>
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header - Testimonials title and description -->
+    <section class="section" style="background: var(--gradient-primary); color: var(--white); padding: 3rem 0;">
+        <div class="container">
+            <h1 style="color: var(--white);">Testimonials</h1>
+            <p style="color: var(--white); opacity: 0.95;">Stories from our community members and healthcare partners</p>
+        </div>
+    </section>
+
+    <!-- User Testimonials Section - User reviews dynamically loaded from Storage -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>What Our Users Say</h2>
+                <p>Real experiences from Sierra Leoneans using Salone Health Connect</p>
+            </div>
+            
+            <div class="grid grid-3" id="user-testimonials">
+                <!-- Testimonials will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Healthcare Worker Testimonials Section - Feedback from medical professionals -->
+    <section class="section" style="background: var(--gray-100);">
+        <div class="container">
+            <div class="section-header">
+                <h2>Healthcare Workers</h2>
+                <p>Feedback from medical professionals partnering with us</p>
+            </div>
+            
+            <div class="grid grid-2">
+                <div class="testimonial-card">
+                    <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=100" alt="Healthcare Worker" class="testimonial-avatar">
+                    <p class="testimonial-text">"Salone Health Connect has revolutionized how we connect patients with healthcare services. The platform helps us reach more people and provide better care."</p>
+                    <p class="testimonial-author">Dr. Ibrahim Sesay</p>
+                    <p class="testimonial-role">Medical Officer, Connaught Hospital</p>
+                </div>
+                <div class="testimonial-card">
+                    <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=100" alt="Healthcare Worker" class="testimonial-avatar">
+                    <p class="testimonial-text">"The health education resources are invaluable. Our patients now have access to reliable information that helps them understand their health better."</p>
+                    <p class="testimonial-author">Nurse Adama Kamara</p>
+                    <p class="testimonial-role">Community Health Nurse, Bo</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Patient Success Stories Section - Real patient experiences and outcomes -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Patient Success Stories</h2>
+                <p>How Salone Health Connect has made a difference in people's lives</p>
+            </div>
+            
+            <div class="grid grid-2">
+                <div class="glass-card">
+                    <h3>🏥 Finding the Right Care</h3>
+                    <p>"When my daughter fell ill late at night, I didn't know where to go. Salone Health Connect helped me find the nearest clinic with emergency services. The quick information saved precious time."</p>
+                    <p style="margin-top: 1rem; font-weight: 600;">- Mariama Conteh, Freetown</p>
+                </div>
+                <div class="glass-card">
+                    <h3>📚 Learning About Malaria Prevention</h3>
+                    <p>"The health education articles taught me how to protect my family from malaria. Since following the prevention tips, none of my children have had malaria. This platform is a lifesaver."</p>
+                    <p style="margin-top: 1rem; font-weight: 600;">- Samuel Bangura, Makeni</p>
+                </div>
+                <div class="glass-card">
+                    <h3>🚨 Staying Informed During Emergencies</h3>
+                    <p>"During the cholera outbreak, Salone Health Connect provided timely alerts and prevention information. I was able to protect my family and community thanks to the platform."</p>
+                    <p style="margin-top: 1rem; font-weight: 600;">- Fatmata Turay, Kenema</p>
+                </div>
+                <div class="glass-card">
+                    <h3>🤝 Connecting with Healthcare Workers</h3>
+                    <p>"As a pregnant woman, I was anxious about finding good care. The platform helped me locate a clinic with maternal health services and I had a safe delivery."</p>
+                    <p style="margin-top: 1rem; font-weight: 600;">- Isatu Koroma, Port Loko</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Share Your Story Section - Call to action for users to submit testimonials -->
+    <section class="section" style="background: var(--gradient-primary); color: var(--white);">
+        <div class="container">
+            <div class="glass-card" style="text-align: center; background: rgba(255, 255, 255, 0.9);">
+                <h2 style="color: var(--gray-900);">Share Your Story</h2>
+                <p style="color: var(--gray-600); margin-bottom: 1.5rem;">Have you used Salone Health Connect? We'd love to hear your experience!</p>
+                <a href="contact.html" class="btn btn-primary">Share Your Testimonial</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer - Site footer with copyright -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 Salone Health Connect. A Digital Public Good for Sierra Leone.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Container - Container for notification messages -->
+    <div class="toast-container"></div>
+
+    <!-- Main JavaScript file with authentication and utilities -->
+    <script src="js/main.js"></script>
+    <!-- Inline script for loading user testimonials from Storage -->
+    <script>
+        // Load user testimonials from Storage object and display them
+        function loadTestimonials() {
+            const container = document.getElementById('user-testimonials');
+            
+            container.innerHTML = Storage.testimonials.map(testimonial => `
+                <div class="testimonial-card">
+                    <img src="${testimonial.avatar}" alt="${testimonial.name}" class="testimonial-avatar">
+                    <p class="testimonial-text">"${testimonial.text}"</p>
+                    <p class="testimonial-author">${testimonial.name}</p>
+                    <p class="testimonial-role">${testimonial.role}</p>
+                </div>
+            `).join('');
+        }
+
+        // Initialize testimonials page when DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            loadTestimonials();
+        });
+    </script>
+</body>
+</html>
