@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Article Details - Salone Health Connect</title>
+    <meta name="description" content="Read detailed health education articles on disease prevention, nutrition, and wellness in Sierra Leone.">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Navigation Bar - Main site navigation with links to all pages -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="navbar-brand">
+                <span>🏥</span> Salone Health Connect
+            </a>
+            <div class="navbar-nav">
+                <a href="index.html">Home</a>
+                <a href="clinics.html">Clinics</a>
+                <a href="education.html" class="active">Health Education</a>
+                <a href="alerts.html">Emergency Alerts</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="navbar-actions auth-buttons">
+                <a href="signup.html" class="btn btn-primary">Sign Up</a>
+                <a href="login.html" class="btn btn-outline">Login</a>
+            </div>
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Article Details Section - Displays full article content from Local Storage with related articles -->
+    <section class="section">
+        <div class="container">
+            <div class="glass-card">
+                <div id="article-details-content">
+                    <!-- Article details will be loaded dynamically -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer - Site footer with copyright -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 Salone Health Connect. A Digital Public Good for Sierra Leone.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Container - Container for notification messages -->
+    <div class="toast-container"></div>
+
+    <!-- Main JavaScript file with authentication and utilities -->
+    <script src="js/main.js"></script>
+    <!-- Inline script for loading article details from Local Storage -->
+    <script>
+        // Load article details from Local Storage (selectedArticle) and display them
+        function loadArticleDetails() {
+            const articleData = localStorage.getItem('selectedArticle');
+            
+            if (!articleData) {
+                document.getElementById('article-details-content').innerHTML = `
+                    <div style="text-align: center; padding: 3rem;">
+                        <div style="font-size: 4rem; margin-bottom: 1rem;">📚</div>
+                        <h3>No Article Selected</h3>
+                        <p style="color: var(--gray-600); margin-bottom: 1.5rem;">Please select an article from the Health Education Center</p>
+                        <a href="education.html" class="btn btn-primary">Browse Articles</a>
+                    </div>
+                `;
+                return;
+            }
+            
+            const article = JSON.parse(articleData);
+            
+            // Get related articles from same category (excluding current article)
+            const relatedArticles = Storage.articles
+                .filter(a => a.category === article.category && a.id !== article.id)
+                .slice(0, 3);
+            
+            document.getElementById('article-details-content').innerHTML = `
+                <div style="margin-bottom: 2rem;">
+                    <a href="education.html" style="color: var(--primary-blue); font-weight: 600;">← Back to Health Education</a>
+                </div>
+                
+                <img src="${article.image}" alt="${article.title}" style="width: 100%; max-height: 400px; object-fit: cover; border-radius: var(--radius-xl); margin-bottom: 2rem;">
+                
+                <div style="margin-bottom: 1.5rem;">
+                    <span style="padding: 0.5rem 1rem; background: var(--primary-blue); color: var(--white); border-radius: 2rem; font-size: 0.875rem;">${article.category}</span>
+                    <span style="margin-left: 1rem; color: var(--gray-500); font-size: 0.875rem;">📅 ${article.date}</span>
+                </div>
+                
+                <h1 style="margin-bottom: 1.5rem;">${article.title}</h1>
+                
+                <div style="line-height: 1.8; color: var(--gray-700); white-space: pre-line;">
+                    ${article.content}
+                </div>
+                
+                ${relatedArticles.length > 0 ? `
+                    <div style="margin-top: 3rem; padding-top: 2rem; border-top: 2px solid var(--gray-200);">
+                        <h3 style="margin-bottom: 1.5rem;">Related Articles</h3>
+                        <div class="grid grid-3">
+                            ${relatedArticles.map(related => `
+                                <div class="article-card">
+                                    <img src="${related.image}" alt="${related.title}" class="article-image" style="height: 150px;">
+                                    <div class="article-content">
+                                        <span class="article-category">${related.category}</span>
+                                        <h4 class="article-title" style="font-size: 1rem;">${related.title}</h4>
+                                        <button class="btn btn-primary btn-sm" onclick="Navigation.goToArticleDetails(${related.id})">Read More</button>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                ` : ''}
+                
+                <div style="margin-top: 2rem; text-align: center;">
+                    <a href="education.html" class="btn btn-secondary">Browse All Articles</a>
+                </div>
+            `;
+        }
+
+        // Initialize article details page when DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            loadArticleDetails();
+        });
+    </script>
+</body>
+</html>

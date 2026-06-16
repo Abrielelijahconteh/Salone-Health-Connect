@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Support - Salone Health Connect</title>
+    <meta name="description" content="Contact Salone Health Connect support team for assistance with healthcare services in Sierra Leone.">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Navigation Bar - Main site navigation with links to all pages -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="navbar-brand">
+                <span>🏥</span> Salone Health Connect
+            </a>
+            <div class="navbar-nav">
+                <a href="index.html">Home</a>
+                <a href="clinics.html">Clinics</a>
+                <a href="education.html">Health Education</a>
+                <a href="alerts.html">Emergency Alerts</a>
+                <a href="about.html">About</a>
+                <a href="contact.html" class="active">Contact</a>
+            </div>
+            <div class="navbar-actions auth-buttons">
+                <a href="signup.html" class="btn btn-primary">Sign Up</a>
+                <a href="login.html" class="btn btn-outline">Login</a>
+            </div>
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header - Contact support title and description -->
+    <section class="section" style="background: var(--gradient-primary); color: var(--white); padding: 3rem 0;">
+        <div class="container">
+            <h1 style="color: var(--white);">Contact Support</h1>
+            <p style="color: var(--white); opacity: 0.95;">Get in touch with our support team for assistance</p>
+        </div>
+    </section>
+
+    <!-- Contact Info Section - Phone, email, location, and support hours -->
+    <section class="section">
+        <div class="container">
+            <div class="contact-info">
+                <div class="contact-info-card">
+                    <div class="contact-info-icon">📞</div>
+                    <h3 class="contact-info-title">Phone</h3>
+                    <p class="contact-info-text">Emergency: 117</p>
+                    <p class="contact-info-text">Support: +232 75268222</p>
+                </div>
+                <div class="contact-info-card">
+                    <div class="contact-info-icon">📧</div>
+                    <h3 class="contact-info-title">Email</h3>
+                    <p class="contact-info-text">info@salonehealth.sl</p>
+                    <p class="contact-info-text">support@salonehealth.sl</p>
+                </div>
+                <div class="contact-info-card">
+                    <div class="contact-info-icon">📍</div>
+                    <h3 class="contact-info-title">Location</h3>
+                    <p class="contact-info-text">Freetown, Sierra Leone</p>
+                    <p class="contact-info-text">Western Area</p>
+                </div>
+                <div class="contact-info-card">
+                    <div class="contact-info-icon">🕐</div>
+                    <h3 class="contact-info-title">Support Hours</h3>
+                    <p class="contact-info-text">Monday - Friday</p>
+                    <p class="contact-info-text">8:00 AM - 6:00 PM</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form Section - Form for users to send messages with validation -->
+    <section class="section" style="background: var(--gray-100);">
+        <div class="container">
+            <div class="section-header">
+                <h2>Send Us a Message</h2>
+                <p>Fill out the form below and we'll get back to you as soon as possible</p>
+            </div>
+            
+            <div style="max-width: 600px; margin: 0 auto;">
+                <div class="glass-card">
+                    <!-- Contact form with validation - handled by handleContactForm in main.js -->
+                    <form id="contact-form" onsubmit="handleContactForm(event)">
+                        <div class="form-group">
+                            <label class="form-label" for="name">Full Name *</label>
+                            <input type="text" id="name" name="name" class="form-input" placeholder="Enter your full name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" class="form-input" placeholder="Enter your email address" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="subject">Subject *</label>
+                            <select id="subject" name="subject" class="form-select" required>
+                                <option value="">Select a subject</option>
+                                <option value="general">General Inquiry</option>
+                                <option value="technical">Technical Support</option>
+                                <option value="feedback">Feedback</option>
+                                <option value="partnership">Partnership</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="message">Message *</label>
+                            <textarea id="message" name="message" class="form-textarea" placeholder="How can we help you?" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section - Google Maps integration showing location -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Location</h2>
+                <p>Find us on the map</p>
+            </div>
+            
+            <div class="map-container">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31678.5788763995!2d-13.2448!3d8.4844!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOMjCsDI5JzAzLjgiTiAxM8KwMTQnNDEuMyJX!5e0!3m2!1sen!2ssl!4v1620000000000!5m2!1sen!2ssl" 
+                    width="100%" 
+                    height="400" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy"
+                    title="Salone Health Connect Location">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer - Site footer with copyright -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 Salone Health Connect. A Digital Public Good for Sierra Leone.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Container - Container for notification messages -->
+    <div class="toast-container"></div>
+
+    <!-- Main JavaScript file with authentication and utilities -->
+    <script src="js/main.js"></script>
+</body>
+</html>
