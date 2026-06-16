@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Salone Health Connect</title>
+    <meta name="description" content="Create your account on Salone Health Connect to access healthcare services across Sierra Leone.">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Navigation Bar - Main site navigation with links to all pages -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="navbar-brand">
+                <span>🏥</span> Salone Health Connect
+            </a>
+            <div class="navbar-nav">
+                <a href="index.html">Home</a>
+                <a href="clinics.html">Clinics</a>
+                <a href="education.html">Health Education</a>
+                <a href="alerts.html">Emergency Alerts</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="navbar-actions auth-buttons">
+                <a href="signup.html" class="btn btn-primary">Sign Up</a>
+                <a href="login.html" class="btn btn-outline">Login</a>
+            </div>
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sign Up Section - User registration form with validation -->
+    <section class="section" style="min-height: calc(100vh - 200px); display: flex; align-items: center;">
+        <div class="container">
+            <div class="section-header">
+                <h2>Create Your Account</h2>
+                <p>Join Salone Health Connect to access healthcare services across Sierra Leone</p>
+            </div>
+            
+            <div style="max-width: 500px; margin: 0 auto;">
+                <div class="glass-card">
+                    <!-- Sign up form with validation - handled by handleSignup in main.js -->
+                    <form id="signup-form" onsubmit="handleSignup(event)">
+                        <!-- Full name input field -->
+                        <div class="form-group">
+                            <label class="form-label" for="fullName">Full Name *</label>
+                            <input type="text" id="fullName" name="fullName" class="form-input" placeholder="Enter your full name" required>
+                        </div>
+                        
+                        <!-- Email input field with validation -->
+                        <div class="form-group">
+                            <label class="form-label" for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" class="form-input" placeholder="Enter your email address" required>
+                        </div>
+                        
+                        <!-- Phone number input field -->
+                        <div class="form-group">
+                            <label class="form-label" for="phone">Phone Number *</label>
+                            <input type="tel" id="phone" name="phone" class="form-input" placeholder="Enter your phone number (e.g., +232 XX XXX XXX)" required>
+                        </div>
+                        
+                        <!-- Password input field (minimum 6 characters) -->
+                        <div class="form-group">
+                            <label class="form-label" for="password">Password *</label>
+                            <input type="password" id="password" name="password" class="form-input" placeholder="Create a password (minimum 6 characters)" required>
+                        </div>
+                        
+                        <!-- Confirm password input field for validation -->
+                        <div class="form-group">
+                            <label class="form-label" for="confirmPassword">Confirm Password *</label>
+                            <input type="password" id="confirmPassword" name="confirmPassword" class="form-input" placeholder="Confirm your password" required>
+                        </div>
+                        
+                        <!-- Terms of service checkbox (required) -->
+                        <div class="form-group">
+                            <label class="form-checkbox">
+                                <input type="checkbox" required>
+                                <span>I agree to the <a href="#" style="text-decoration: underline;">Terms of Service</a> and <a href="#" style="text-decoration: underline;">Privacy Policy</a></span>
+                            </label>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Create Account</button>
+                    </form>
+                    
+                    <!-- Link to login page for existing users -->
+                    <div style="text-align: center; margin-top: 1.5rem;">
+                        <p style="color: var(--gray-600);">Already have an account? <a href="login.html" style="font-weight: 600;">Login here</a></p>
+                    </div>
+                    
+                    <!-- Guest access option for users who don't want to register -->
+                    <div style="text-align: center; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--gray-200);">
+                        <p style="color: var(--gray-600);">Or continue as <a href="javascript:void(0)" onclick="handleGuestAccess()" style="font-weight: 600; color: var(--primary-blue);">Guest</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer - Site footer with copyright -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 Salone Health Connect. A Digital Public Good for Sierra Leone.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Container - Container for notification messages -->
+    <div class="toast-container"></div>
+
+    <!-- Main JavaScript file with authentication and utilities -->
+    <script src="js/main.js"></script>
+</body>
+</html>
