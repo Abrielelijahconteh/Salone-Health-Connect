@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergency Alerts - Salone Health Connect</title>
+    <meta name="description" content="Stay informed about health emergencies, disease outbreaks, and vaccination campaigns in Sierra Leone.">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Navigation Bar - Main site navigation with links to all pages -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="navbar-brand">
+                <span>🏥</span> Salone Health Connect
+            </a>
+            <div class="navbar-nav">
+                <a href="index.html">Home</a>
+                <a href="clinics.html">Clinics</a>
+                <a href="education.html">Health Education</a>
+                <a href="alerts.html" class="active">Emergency Alerts</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="navbar-actions auth-buttons">
+                <a href="signup.html" class="btn btn-primary">Sign Up</a>
+                <a href="login.html" class="btn btn-outline">Login</a>
+            </div>
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header - Emergency alerts title and description -->
+    <section class="section" style="background: var(--gradient-primary); color: var(--white); padding: 3rem 0;">
+        <div class="container">
+            <h1 style="color: var(--white);">Emergency Alerts</h1>
+            <p style="color: var(--white); opacity: 0.95;">Stay informed about health emergencies and important updates</p>
+        </div>
+    </section>
+
+    <!-- Emergency Contact Numbers - Critical emergency hotlines for Sierra Leone -->
+    <section class="section">
+        <div class="container">
+            <div class="glass-card" style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); color: var(--white);">
+                <h2 style="color: var(--white); margin-bottom: 1rem;">🚨 Emergency Contact Numbers</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">🚑</div>
+                        <div style="font-size: 2rem; font-weight: 700;">117</div>
+                        <div>Ambulance</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">👮</div>
+                        <div style="font-size: 2rem; font-weight: 700;">119</div>
+                        <div>Police</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">🔥</div>
+                        <div style="font-size: 2rem; font-weight: 700;">112</div>
+                        <div>Fire</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">🏥</div>
+                        <div style="font-size: 2rem; font-weight: 700;">117</div>
+                        <div>National Health</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Active Alerts Section - Displays current health alerts dynamically loaded from Storage -->
+    <section class="section" style="background: var(--gray-100);">
+        <div class="container">
+            <div class="section-header">
+                <h2>Active Alerts</h2>
+                <p>Current health alerts and campaigns you should know about</p>
+            </div>
+            
+            <div id="alerts-container">
+                <!-- Alerts will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Filter Section - Filter buttons to narrow down alerts by type -->
+    <section class="section">
+        <div class="container">
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all" onclick="filterAlerts('all')">All Alerts</button>
+                <button class="filter-btn" data-filter="outbreak" onclick="filterAlerts('outbreak')">Disease Outbreaks</button>
+                <button class="filter-btn" data-filter="campaign" onclick="filterAlerts('campaign')">Health Campaigns</button>
+                <button class="filter-btn" data-filter="vaccination" onclick="filterAlerts('vaccination')">Vaccination Drives</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer - Site footer with copyright -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 Salone Health Connect. A Digital Public Good for Sierra Leone.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Container - Container for notification messages -->
+    <div class="toast-container"></div>
+
+    <!-- Main JavaScript file with authentication and utilities -->
+    <script src="js/main.js"></script>
+    <!-- Inline script for alerts loading and filtering -->
+    <script>
+        let currentAlertFilter = 'all';
+
+        // Load alerts from Storage object and apply type filter
+        function loadAlerts() {
+            const container = document.getElementById('alerts-container');
+            let filteredAlerts = Storage.alerts;
+            
+            // Apply filter
+            if (currentAlertFilter !== 'all') {
+                filteredAlerts = filteredAlerts.filter(alert => alert.type === currentAlertFilter);
+            }
+            
+            if (filteredAlerts.length === 0) {
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 3rem;">
+                        <div style="font-size: 4rem; margin-bottom: 1rem;">📢</div>
+                        <h3>No alerts found</h3>
+                        <p style="color: var(--gray-600);">Check back later for new health alerts and updates</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = filteredAlerts.map(alert => `
+                <div class="emergency-alert ${alert.urgency === 'urgent' ? 'urgent' : ''}" style="margin-bottom: 1.5rem;">
+                    <div class="emergency-alert-title">
+                        ${alert.urgency === 'urgent' ? '🚨 URGENT: ' : '📢 '}${alert.title}
+                    </div>
+                    <div class="emergency-alert-content">
+                        ${alert.content}
+                    </div>
+                    <div style="margin-top: 1rem; font-size: 0.875rem; color: var(--gray-600);">
+                        <strong>Posted:</strong> ${alert.date} | <strong>Valid Until:</strong> ${alert.endDate}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Filter alerts by selected type (outbreak, campaign, vaccination)
+        function filterAlerts(type) {
+            currentAlertFilter = type;
+            
+            // Update active button
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.filter === type) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            loadAlerts();
+        }
+
+        // Initialize alerts page when DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            loadAlerts();
+        });
+    </script>
+</body>
+</html>
