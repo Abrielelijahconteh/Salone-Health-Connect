@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Salone Health Connect</title>
+    <meta name="description" content="Login to your Salone Health Connect account to access healthcare services across Sierra Leone.">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Navigation Bar - Main site navigation with links to all pages -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="navbar-brand">
+                <span>🏥</span> Salone Health Connect
+            </a>
+            <div class="navbar-nav">
+                <a href="index.html">Home</a>
+                <a href="clinics.html">Clinics</a>
+                <a href="education.html">Health Education</a>
+                <a href="alerts.html">Emergency Alerts</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="navbar-actions auth-buttons">
+                <a href="signup.html" class="btn btn-primary">Sign Up</a>
+                <a href="login.html" class="btn btn-outline">Login</a>
+            </div>
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Login Section - User authentication form with email and password -->
+    <section class="section" style="min-height: calc(100vh - 200px); display: flex; align-items: center;">
+        <div class="container">
+            <div class="section-header">
+                <h2>Welcome Back</h2>
+                <p>Login to access your Salone Health Connect dashboard</p>
+            </div>
+            
+            <div style="max-width: 500px; margin: 0 auto;">
+                <div class="glass-card">
+                    <!-- Login form with validation - handled by handleLogin in main.js -->
+                    <form id="login-form" onsubmit="handleLogin(event)">
+                        <!-- Email input field with validation -->
+                        <div class="form-group">
+                            <label class="form-label" for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" class="form-input" placeholder="Enter your email address" required>
+                        </div>
+                        
+                        <!-- Password input field -->
+                        <div class="form-group">
+                            <label class="form-label" for="password">Password *</label>
+                            <input type="password" id="password" name="password" class="form-input" placeholder="Enter your password" required>
+                        </div>
+                        
+                        <!-- Remember me checkbox option -->
+                        <div class="form-group">
+                            <label class="form-checkbox">
+                                <input type="checkbox" name="rememberMe">
+                                <span>Remember me</span>
+                            </label>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+                    </form>
+                    
+                    <!-- Link to sign up page for new users -->
+                    <div style="text-align: center; margin-top: 1.5rem;">
+                        <p style="color: var(--gray-600);">Don't have an account? <a href="signup.html" style="font-weight: 600;">Sign up here</a></p>
+                    </div>
+                    
+                    <!-- Guest access option for users who don't want to login -->
+                    <div style="text-align: center; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--gray-200);">
+                        <p style="color: var(--gray-600);">Or continue as <a href="javascript:void(0)" onclick="handleGuestAccess()" style="font-weight: 600; color: var(--primary-blue);">Guest</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer - Site footer with copyright -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 Salone Health Connect. A Digital Public Good for Sierra Leone.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Container - Container for notification messages -->
+    <div class="toast-container"></div>
+
+    <!-- Main JavaScript file with authentication and utilities -->
+    <script src="js/main.js"></script>
+</body>
+</html>

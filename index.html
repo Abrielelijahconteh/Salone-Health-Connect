@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salone Health Connect - Healthcare Platform for Sierra Leone</title>
+    <meta name="description" content="Digital Public Good healthcare platform improving access to healthcare information, clinics, and resources across Sierra Leone.">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Navigation Bar - Main site navigation with links to all pages -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="navbar-brand">
+                <span>🏥</span> Salone Health Connect
+            </a>
+            <div class="navbar-nav">
+                <a href="index.html" class="active">Home</a>
+                <a href="clinics.html">Clinics</a>
+                <a href="education.html">Health Education</a>
+                <a href="alerts.html">Emergency Alerts</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="navbar-actions auth-buttons">
+                <a href="signup.html" class="btn btn-primary">Sign Up</a>
+                <a href="login.html" class="btn btn-outline">Login</a>
+            </div>
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section - Main landing area with headline and call-to-action buttons -->
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>Your Health, Our Priority</h1>
+            <p>Access quality healthcare information, find clinics, and stay informed about health services across Sierra Leone. Your journey to better health starts here.</p>
+            <div class="hero-buttons">
+                <a href="signup.html" class="btn btn-secondary btn-lg">Get Started Free</a>
+                <a href="clinics.html" class="btn btn-outline btn-lg" style="color: white; border-color: white;">Find a Clinic</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section - Animated counters showing platform impact numbers -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">150+</div>
+                    <div class="stat-label">Healthcare Facilities</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">50,000+</div>
+                    <div class="stat-label">Users Served</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">200+</div>
+                    <div class="stat-label">Health Articles</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">16</div>
+                    <div class="stat-label">Districts Covered</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section - Overview of main platform features with glassmorphism cards -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Services</h2>
+                <p>Comprehensive healthcare services designed to meet the needs of every Sierra Leonean</p>
+            </div>
+            <div class="grid grid-4">
+                <div class="glass-card text-center">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">🏥</div>
+                    <h3>Clinic Finder</h3>
+                    <p>Locate healthcare facilities near you with detailed information about services and operating hours.</p>
+                    <a href="clinics.html" class="btn btn-primary">Find Clinics</a>
+                </div>
+                <div class="glass-card text-center">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">📚</div>
+                    <h3>Health Education</h3>
+                    <p>Access reliable health information on disease prevention, nutrition, and wellness.</p>
+                    <a href="education.html" class="btn btn-primary">Learn More</a>
+                </div>
+                <div class="glass-card text-center">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">🚨</div>
+                    <h3>Emergency Alerts</h3>
+                    <p>Stay informed about health emergencies, disease outbreaks, and vaccination campaigns.</p>
+                    <a href="alerts.html" class="btn btn-primary">View Alerts</a>
+                </div>
+                <div class="glass-card text-center">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">💬</div>
+                    <h3>Community Support</h3>
+                    <p>Connect with healthcare professionals and community health workers for guidance.</p>
+                    <a href="contact.html" class="btn btn-primary">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Clinics Section - Displays top 3 healthcare facilities dynamically loaded from Storage -->
+    <section class="section" style="background: var(--gray-100);">
+        <div class="container">
+            <div class="section-header">
+                <h2>Featured Clinics</h2>
+                <p>Top healthcare facilities across Sierra Leone providing quality medical services</p>
+            </div>
+            <div class="grid grid-3" id="featured-clinics">
+                <!-- Clinics will be loaded dynamically -->
+            </div>
+            <div class="text-center mt-4">
+                <a href="clinics.html" class="btn btn-secondary btn-lg">View All Clinics</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section - User reviews and feedback dynamically loaded from Storage -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>What People Say</h2>
+                <p>Stories from our community members about their experience with Salone Health Connect</p>
+            </div>
+            <div class="grid grid-3" id="testimonials">
+                <!-- Testimonials will be loaded dynamically -->
+            </div>
+            <div class="text-center mt-4">
+                <a href="testimonials.html" class="btn btn-outline">Read More Testimonials</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section - Frequently asked questions with accordion functionality, loaded from Storage -->
+    <section class="section" style="background: var(--gray-100);">
+        <div class="container">
+            <div class="section-header">
+                <h2>Frequently Asked Questions</h2>
+                <p>Find answers to common questions about our platform and services</p>
+            </div>
+            <div class="accordion" id="faq-accordion">
+                <!-- FAQs will be loaded dynamically -->
+            </div>
+            <div class="text-center mt-4">
+                <a href="faq.html" class="btn btn-outline">View All FAQs</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section - Email subscription form for health updates and announcements -->
+    <section class="section">
+        <div class="container">
+            <div class="newsletter">
+                <h3>Stay Informed</h3>
+                <p>Subscribe to our newsletter for health tips, updates, and important announcements</p>
+                <form class="newsletter-form" onsubmit="handleNewsletter(event)">
+                    <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
+                    <button type="submit" class="btn btn-secondary">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer - Site footer with copyright and links -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h3>🏥 Salone Health Connect</h3>
+                    <p style="color: var(--gray-400);">Improving access to healthcare information and services across Sierra Leone.</p>
+                </div>
+                <div>
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="clinics.html">Clinics</a></li>
+                        <li><a href="education.html">Health Education</a></li>
+                        <li><a href="alerts.html">Emergency Alerts</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="testimonials.html">Testimonials</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Contact</h3>
+                    <ul class="footer-links">
+                        <li><a href="tel:+232117">📞 Emergency: 117</a></li>
+                        <li><a href="mailto:info@salonehealth.sl">📧 info@salonehealth.sl</a></li>
+                        <li>📍 Freetown, Sierra Leone</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Salone Health Connect. A Digital Public Good for Sierra Leone.</p>
+                <p style="margin-top: 0.5rem; font-size: 0.875rem;">Aligned with SDG 3, SDG 9, and SDG 10</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Container - Container for notification messages -->
+    <div class="toast-container"></div>
+
+    <!-- Main JavaScript file with authentication and utilities -->
+    <script src="js/main.js"></script>
+    <!-- Inline script for dynamic content loading -->
+    <script>
+        // Load featured clinics from Storage object and display them
+        function loadFeaturedClinics() {
+            const container = document.getElementById('featured-clinics');
+            const featuredClinics = Storage.clinics.slice(0, 3);
+            
+            container.innerHTML = featuredClinics.map(clinic => `
+                <div class="card">
+                    <img src="${clinic.image}" alt="${clinic.name}" class="card-image">
+                    <div class="card-content">
+                        <h3 class="card-title">${clinic.name}</h3>
+                        <p class="card-description">${clinic.description}</p>
+                        <div class="card-footer">
+                            <span style="color: var(--gray-500);">📍 ${clinic.district}</span>
+                            <button class="btn btn-primary btn-sm" onclick="Navigation.goToClinicDetails(${clinic.id})">View Details</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Load testimonials from Storage object and display them
+        function loadTestimonials() {
+            const container = document.getElementById('testimonials');
+            const featuredTestimonials = Storage.testimonials.slice(0, 3);
+            
+            container.innerHTML = featuredTestimonials.map(testimonial => `
+                <div class="testimonial-card">
+                    <img src="${testimonial.avatar}" alt="${testimonial.name}" class="testimonial-avatar">
+                    <p class="testimonial-text">"${testimonial.text}"</p>
+                    <p class="testimonial-author">${testimonial.name}</p>
+                    <p class="testimonial-role">${testimonial.role}</p>
+                </div>
+            `).join('');
+        }
+
+        // Load FAQs from Storage object and display with accordion
+        function loadFAQs() {
+            const container = document.getElementById('faq-accordion');
+            const featuredFAQs = Storage.faqs.slice(0, 5);
+            
+            container.innerHTML = featuredFAQs.map(faq => `
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        ${faq.question}
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>${faq.answer}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Initialize page content when DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            loadFeaturedClinics();
+            loadTestimonials();
+            loadFAQs();
+        });
+    </script>
+</body>
+</html>
